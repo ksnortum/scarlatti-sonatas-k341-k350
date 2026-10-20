@@ -21,10 +21,10 @@
 %
 
 rhMark = \markup { 
-  \path #0.1 #'((moveto 0 0)(rlineto 0 -1.5)(rlineto 0.5 0))
+  \path #0.1 #'((moveto 0 0)(rlineto 0 -1.75)(rlineto 0.5 0))
 }
 lhMark = \markup { 
-  \path #0.1 #'((moveto 0 0)(rlineto 0 1.5)(rlineto 0.5 0))
+  \path #0.1 #'((moveto 0 0)(rlineto 0 1.75)(rlineto 0.5 0))
 }
 
 %
