@@ -90,6 +90,11 @@
 % Definitions
 %
 
+fPocoRallMarkup = \markup { f \normal-text \large \italic "poco rall." }
+fPocoRall = 
+  \tweak self-alignment-X ##f
+  #(make-dynamic-script fPocoRallMarkup)
+
 % voiceFive = #(context-spec-music (make-voice-props-set 4) 'Voice)
 
 % #(define-public (bracket-stencils grob)
@@ -106,30 +111,30 @@
 % %% Usage:
 % % \relative c'' { \bracketify c4 }
 
-% #(define make-bracketed
-%    (grob-transformer
-%     'stencil
-%     (lambda (grob orig)
-%       (let* ((paren-stil (grob-interpret-markup
-%                           grob 
-%                           (markup #:musicglyph "accidentals.leftparen")))
-%              (ext (ly:stencil-extent paren-stil Y))
-%              (stil (ly:accidental-interface::print grob))
-%              (thick (ly:output-def-lookup (ly:grob-layout grob)
-%                                           'line-thickness 0.1))
-%              (padding thick)
-%              (protrusion (* 2.5 thick))
-%              (lb (ly:bracket Y ext thick protrusion))
-%              (rb (ly:bracket Y ext thick (- protrusion))))
-%         (set! stil (ly:stencil-combine-at-edge stil X 1 rb padding))
-%         (set! stil (ly:stencil-combine-at-edge stil X -1 lb padding))
-%         stil))))
-% 
-% bracketAccidental = 
-%   \tweak AccidentalCautionary.parenthesized ##f
-%   \tweak AccidentalCautionary.stencil #make-bracketed \etc
-% %% Usage:
-% %% { <c'' \bracketAccidental es''? fis''>1 }
+#(define make-bracketed
+   (grob-transformer
+    'stencil
+    (lambda (grob orig)
+      (let* ((paren-stil (grob-interpret-markup
+                          grob 
+                          (markup #:musicglyph "accidentals.leftparen")))
+             (ext (ly:stencil-extent paren-stil Y))
+             (stil (ly:accidental-interface::print grob))
+             (thick (ly:output-def-lookup (ly:grob-layout grob)
+                                          'line-thickness 0.1))
+             (padding thick)
+             (protrusion (* 2.5 thick))
+             (lb (ly:bracket Y ext thick protrusion))
+             (rb (ly:bracket Y ext thick (- protrusion))))
+        (set! stil (ly:stencil-combine-at-edge stil X 1 rb padding))
+        (set! stil (ly:stencil-combine-at-edge stil X -1 lb padding))
+        stil))))
+
+bracketAccidental = 
+  \tweak AccidentalCautionary.parenthesized ##f
+  \tweak AccidentalCautionary.stencil #make-bracketed \etc
+%% Usage:
+%% { <c'' \bracketAccidental es''? fis''>1 }
 
 % makeSpanner = 
 % #(define-music-function (mrkup) (markup?)
@@ -242,10 +247,10 @@ addStaccato =
 %   #(make-music 'CrescendoEvent 'span-direction START 'span-type 'text
 %                'span-text crescNoDotMarkup)
 
-% crescWOMarkup = \markup \large \italic \whiteout \pad-markup #0.25 cresc.
-% crescWO =
-%   #(make-music 'CrescendoEvent 'span-direction START 'span-type 'text
-%                'span-text crescWOMarkup)
+crescWOMarkup = \markup \large \italic \whiteout \pad-markup #0.25 cresc.
+crescWO =
+  #(make-music 'CrescendoEvent 'span-direction START 'span-type 'text
+               'span-text crescWOMarkup)
 
 staffUp   = \change Staff = "upper"
 staffDown = \change Staff = "lower"
@@ -351,16 +356,16 @@ osp =
 % }
 % revertBeaming = \unset Timing.beamExceptions
 
-% % Subdivide beams
-% % e.g.: a32 \sdb #2 b a b
-% sdb = #(define-music-function
-%    (n m)
-%    (integer? ly:music?)
-%    #{ 
-%      \set stemRightBeamCount = #n
-%      #m
-%      \set stemLeftBeamCount = #n
-%    #})
+% Subdivide beams
+% e.g.: a32 \sdb #2 b a b
+sdb = #(define-music-function
+   (n m)
+   (integer? ly:music?)
+   #{ 
+     \set stemRightBeamCount = #n
+     #m
+     \set stemLeftBeamCount = #n
+   #})
 
 % % Subdivide beams, define both sides
 % % e.g.: a32 \sdbII #2 #1 b a b
@@ -389,7 +394,7 @@ osp =
 
 % trillBelow = \tweak Script.script-priority #-100 \etc
 % trillAbove = \tweak outside-staff-priority #9999 \etc
-% insideSlur = \tweak avoid-slur #'inside \etc
+insideSlur = \tweak avoid-slur #'inside \etc
 % outsideSlur = \tweak avoid-slur #'outside \etc
 % noPriority = \tweak outside-staff-priority ##f \etc
 % graceSpacing = \once \override Score.GraceSpacing.spacing-increment = 0
@@ -488,7 +493,7 @@ noDot = \tweak Dots.stencil ##f \etc
 %
 
 % trillNatural = \markup \teeny \concat { " " \natural }
-% trillFlat = \markup \teeny \concat { " " \flat }
+trillFlat = \markup \teeny \concat { " " \flat }
 % trillFlatParen = \markup \teeny \concat { "(" \flat ")" }
 % trillSharp = \markup \teeny \concat { " " \sharp }
 % md = \markup \italic \halign #-0.4 m.d.
@@ -507,7 +512,7 @@ noDot = \tweak Dots.stencil ##f \etc
 %   \markup \large \italic \whiteout \pad-markup #0.25 "poco sostenuto"
 % unPocoSostenuto = 
 %   \markup \large \italic \whiteout \pad-markup #0.25 "un poco sostenuto"
-% rall = \markup \large \italic rall.
+rall = \markup \large \italic rall.
 % rit = \markup \large \italic rit.
 % pocoRit = \markup \large \italic "poco rit."
 % moltoRit = \markup \large \italic "molto rit."
@@ -515,7 +520,7 @@ noDot = \tweak Dots.stencil ##f \etc
 % unPocoRall = \markup \large \italic "un poco rall."
 % pocoStent = \markup \large \italic "poco stent."
 % pocoRall = \markup \large \italic "poco rall."
-% aTempo = \markup \large \italic "a tempo"
+aTempo = \markup \large \italic "a tempo"
 % rinForzandoERall = \markup \large \italic "rinforzando e rall."
 % accelerando = \markup \large \italic accelerando
 % pocoStent = \markup \large \italic "poco stent."
