@@ -1,10 +1,10 @@
-# scarlatti-sonatas-k321-k330
+# scarlatti-sonatas-k341-k350
 
-[LilyPond](https://lilypond.org/) engraving input files used to create Scarlatti's sonatas K321 through K330.
+[LilyPond](https://lilypond.org/) engraving input files used to create Scarlatti's sonatas K341 through K350.
 
 ## Downloading the sheet music
 
-If you're only interested in the PDFs and/or MIDI files, you can [download them](https://github.com/ksnortum/scarlatti-sonatas-k321-k330/releases/latest) from the latest release. If you're interested in modifying and/or compiling the sheet music using LilyPond, then read the next section.
+If you're only interested in the PDFs and/or MIDI files, you can [download them](https://github.com/ksnortum/scarlatti-sonatas-k341-k350/releases/latest) from the latest release. If you're interested in modifying and/or compiling the sheet music using LilyPond, then read the next section.
 
 ## Creating the PDF and MIDI files
 
@@ -13,13 +13,13 @@ If you're only interested in the PDFs and/or MIDI files, you can [download them]
 PDF and MIDI files can be created by compiling an `ly` file with LilyPond, that is, for instance, issuing the following command (assuming you have [`lilypond` installed  and running](https://lilypond.org/doc/v2.26/Documentation/learning/installing) on your system):
 
 ```sh
-lilypond sonata-k321.ly
+lilypond sonata-k341.ly
 ```
 
 To create a smaller PDF:
 
 ```sh
-lilypond -dno-point-and-click sonata-k321.ly
+lilypond -dno-point-and-click sonata-k341.ly
 ```
 
 ### Two-sided printing
